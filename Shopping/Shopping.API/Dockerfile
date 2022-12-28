@@ -7,9 +7,9 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 COPY ["Shopping/Shopping.API/Shopping.API.csproj", "Shopping/Shopping.API/"]
-RUN dotnet restore "Shopping/Shopping.API/Shopping.API.csproj"
+RUN dotnet restore "Shopping.API/Shopping.API.csproj"
 COPY . .
-WORKDIR "/src/Shopping/Shopping.API"
+WORKDIR "/src/Shopping.API"
 RUN dotnet build "Shopping.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
