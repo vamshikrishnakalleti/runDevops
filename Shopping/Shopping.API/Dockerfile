@@ -10,12 +10,12 @@ COPY ["Shopping/Shopping.API/Shopping.API.csproj", "Shopping/Shopping.API/"]
 RUN dotnet restore "Shopping/Shopping.API/Shopping.API.csproj"
 COPY . .
 WORKDIR "/src/Shopping/Shopping.API"
-RUN dotnet build "Shopping.API.csproj" -c Release -o /app/build
+RUN dotnet build "Shopping/Shopping.API/Shopping.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Shopping.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "Shopping/Shopping.API/Shopping.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Shopping.API.dll"]
+ENTRYPOINT ["dotnet", "Shopping/Shopping.API/Shopping.API.dll"]
